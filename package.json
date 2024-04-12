@@ -15,6 +15,7 @@
   "author": "Sagar Sati",
   "license": "ISC",
   "devDependencies": {
+    "crypto-browserify": "^3.12.0",
     "parcel": "^2.12.0",
     "process": "^0.11.10"
   },
