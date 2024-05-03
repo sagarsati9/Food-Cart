@@ -34,7 +34,7 @@ const Body = () => {
     if (onlineStatus === false) return <h1>Oops looks like you are offline!! Please check your internet connection;</h1>
 
 
-    if (listOfRestaurants.length === 0) return (<Shimmer />);
+    if (listOfRestaurants?.length === 0) return (<Shimmer />);
     return (
         <div className="body">
             <div className="filter flex">
@@ -60,16 +60,17 @@ const Body = () => {
             </div>
             <div className="flex flex-wrap">
                 {filteredRestaurants.map((res) => {
-                      const {aggregatedDiscountInfoV3}= res?.info;
+                      const {aggregatedDiscountInfoV3,aggregatedDiscountInfoV2}= res?.info;
                     return (
+                        
                         <Link key={res?.info?.id} to={"/restaurants/" + res?.info?.id}>
                             {
                                 /**if the restaurant has offer then add offer label to it
                                (i.e return higher order component) else return the normal card  */
-                             
-                               Object.keys(aggregatedDiscountInfoV3).length !==0 ? (<RestaurantCardOffer resData={res}/>) :( <RestaurantCard resData={res} />)
-
                             }
+                             {Object.keys(aggregatedDiscountInfoV3||aggregatedDiscountInfoV2).length !==0 ? (<RestaurantCardOffer resData={res}/>) :( <RestaurantCard resData={res} />)}
+
+                            
                         </Link>)
                 })}
             </div>
